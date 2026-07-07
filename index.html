@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  
+  <title>Center Fitt — Entrenamiento Personalizado en Grupos Reducidos</title>
+  <meta name="description" content="Center Fitt: Tu espacio de entrenamiento personalizado con grupos de máximo 3-4 personas. Atención 1:1, seguimiento constante y resultados reales.">
+  <meta name="keywords" content="gimnasio personalizado, entrenamiento personal, cross training, nutrición, grupos reducidos, center fitt">
+  <meta name="author" content="Center Fitt">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Center Fitt — Entrenamiento Personalizado">
+  <meta property="og:description" content="Tu espacio de entrenamiento personalizado con grupos reducidos.">
+  <meta property="og:locale" content="es_PE">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23dc2626' width='100' height='100' rx='20'/><text x='50' y='70' font-family='Arial Black' font-size='50' font-weight='900' text-anchor='middle' fill='white'>CF</text></svg>">
+
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.1.0/400.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.1.0/600.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.1.0/700.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.1.0/800.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.1.0/900.css" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: {
+              black: '#0a0a0a',
+              dark: '#111111',
+              gray: '#1a1a1a',
+              grayLight: '#2a2a2a',
+              red: '#dc2626',
+              redLight: '#ef4444'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      font-family: 'Inter', system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #ffffff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .fade-up, .fade-in, .scale-in {
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-up { transform: translateY(40px); }
+    .scale-in { transform: scale(0.9); }
+
+    .fade-up.visible, .fade-in.visible, .scale-in.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .hero-section {
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #0a0a0a url('IMAGENES/gym-12.jpeg') center/cover no-repeat;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .video-carousel {
+      position: relative;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+
+    .carousel-viewport {
+      overflow: hidden;
+      border-radius: 1.25rem;
+      border: 1px solid #2a2a2a;
+      background: #1a1a1a;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+    }
+
+    .carousel-slide video {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      max-height: 70vh;
+      object-fit: cover;
+      display: block;
+      background: #0a0a0a;
+    }
+
+    @media (min-width: 640px) {
+      .carousel-slide video {
+        aspect-ratio: 16 / 9;
+        max-height: none;
+      }
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(10,10,10,0.85);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .carousel-btn:hover {
+      background: #dc2626;
+      border-color: #dc2626;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .carousel-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: translateY(-50%);
+    }
+
+    .carousel-btn:disabled:hover {
+      background: rgba(10,10,10,0.85);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .carousel-btn-prev { left: 8px; }
+    .carousel-btn-next { right: 8px; }
+
+    @media (min-width: 768px) {
+      .carousel-btn-prev { left: -24px; }
+      .carousel-btn-next { right: -24px; }
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 1.5rem;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2a2a2a;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: #dc2626;
+      transform: scale(1.2);
+    }
+
+    .cta-banner {
+      background: linear-gradient(135deg, #1a1a1a 0%, #111111 50%, rgba(220,38,38,0.15) 100%);
+      border: 1px solid rgba(220, 38, 38, 0.3);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-video { display: none; }
+    }
+
+    .scene-3d { perspective: 1200px; }
+
+    .card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+      will-change: transform;
+    }
+
+    .card-3d-inner {
+      transform: translateZ(30px);
+      backface-visibility: hidden;
+    }
+
+    .frame-3d {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .frame-3d::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border: 2px solid rgba(220, 38, 38, 0.4);
+      border-radius: 1.25rem;
+      transform: translateZ(-20px);
+      pointer-events: none;
+    }
+
+    .frame-3d::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 1rem;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+      transform: translateZ(-10px);
+      pointer-events: none;
+    }
+
+    .service-card {
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 25px 50px rgba(220, 38, 38, 0.2);
+    }
+
+    .gallery-3d {
+      perspective: 1400px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.45s ease;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-item:hover {
+      box-shadow: 0 20px 40px rgba(220, 38, 38, 0.25);
+    }
+
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .gallery-item:hover::after { opacity: 1; }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 0.75rem;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+      transform: scale(0.9) rotateY(5deg);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .lightbox.open img {
+      transform: scale(1) rotateY(0deg);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .lightbox-close:hover { background: rgba(220, 38, 38, 0.5); }
+
+    .phrase-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phrase-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: #dc2626;
+      transition: width 0.4s ease;
+    }
+
+    .phrase-card:hover::before { width: 6px; }
+
+    .nav-link { position: relative; }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #dc2626;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after { width: 100%; }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    .whatsapp-float:hover { transform: scale(1.1); }
+
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mobile-menu.open { transform: translateX(0); }
+
+    .pulse-red { animation: pulseRed 2s infinite; }
+
+    @keyframes pulseRed {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5); }
+      50% { box-shadow: 0 0 0 12px rgba(220, 38, 38, 0); }
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #dc2626; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
+
+    *:focus-visible {
+      outline: 2px solid #dc2626;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        <a href="#inicio" class="flex items-center gap-2 z-50">
+          <div class="w-8 h-8 bg-brand-red rounded flex items-center justify-center font-black text-sm text-white">CF</div>
+          <span class="font-bold text-lg tracking-tight">CENTER <span class="text-brand-red">FITT</span></span>
+        </a>
+        
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#nosotros" class="nav-link text-sm font-semibold text-gray-300 hover:text-white transition">Nosotros</a>
+          <a href="#servicios" class="nav-link text-sm font-semibold text-gray-300 hover:text-white transition">Servicios</a>
+          <a href="#clientes" class="nav-link text-sm font-semibold text-gray-300 hover:text-white transition">Clientes</a>
+          <a href="#galeria" class="nav-link text-sm font-semibold text-gray-300 hover:text-white transition">Galería</a>
+          <a href="#contacto" class="nav-link text-sm font-semibold text-gray-300 hover:text-white transition">Contacto</a>
+          <a href="https://wa.me/51923849852" target="_blank" rel="noopener noreferrer" class="bg-brand-red hover:bg-brand-redLight text-white text-sm font-bold px-5 py-2.5 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-brand-red/30">WhatsApp</a>
+        </div>
+        
+        <button id="menuBtn" class="md:hidden z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5" aria-label="Menú">
+          <span id="menuLine1" class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span id="menuLine2" class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+          <span id="menuLine3" class="w-4 h-0.5 bg-white transition-all duration-300 self-end mr-4"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 bg-brand-black/98 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8">
+    <a href="#inicio" class="text-2xl font-bold text-white hover:text-brand-red transition" onclick="closeMobileMenu()">Inicio</a>
+    <a href="#nosotros" class="text-2xl font-bold text-gray-400 hover:text-brand-red transition" onclick="closeMobileMenu()">Nosotros</a>
+    <a href="#servicios" class="text-2xl font-bold text-gray-400 hover:text-brand-red transition" onclick="closeMobileMenu()">Servicios</a>
+    <a href="#clientes" class="text-2xl font-bold text-gray-400 hover:text-brand-red transition" onclick="closeMobileMenu()">Clientes</a>
+    <a href="#galeria" class="text-2xl font-bold text-gray-400 hover:text-brand-red transition" onclick="closeMobileMenu()">Galería</a>
+    <a href="#contacto" class="text-2xl font-bold text-gray-400 hover:text-brand-red transition" onclick="closeMobileMenu()">Contacto</a>
+    <a href="https://wa.me/51923849852" target="_blank" rel="noopener noreferrer" class="bg-brand-red text-white font-bold px-8 py-3 rounded-full text-lg mt-4" onclick="closeMobileMenu()">WhatsApp</a>
+  </div>
+
+  <main>
+    <section id="inicio" class="hero-section flex items-center relative overflow-hidden">
+      <div class="hero-video-wrap" aria-hidden="true">
+        <video id="heroVideo" class="hero-video" autoplay muted playsinline poster="IMAGENES/gym-12.jpeg">
+          <source src="VIDEOS/video-01.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/50 to-brand-black"></div>
+      </div>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-24 md:py-0">
+        <div class="max-w-3xl">
+          <div class="fade-up">
+            <span class="inline-flex items-center gap-2 bg-brand-red/10 border border-brand-red/30 text-brand-redLight text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest">
+              <span class="w-2 h-2 bg-brand-red rounded-full animate-pulse"></span>
+              Entrenamiento personalizado
+            </span>
+          </div>
+          
+          <h1 class="fade-up text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none tracking-tight mb-6" style="transition-delay: 0.1s">
+            Tu espacio<br>
+            <span class="text-brand-red">personalizado</span><br>
+            de entrenamiento
+          </h1>
+          
+          <p class="fade-up text-lg sm:text-xl text-gray-400 max-w-xl mb-10 leading-relaxed" style="transition-delay: 0.2s">
+            En <strong class="text-white">Center Fitt</strong> no somos un gimnasio masivo. Trabajamos con grupos reducidos para brindarte la atención, el seguimiento y el enfoque que tu cuerpo merece.
+          </p>
+          
+          <div class="fade-up flex flex-col sm:flex-row gap-4" style="transition-delay: 0.3s">
+            <a href="https://wa.me/51923849852?text=Hola!%20Me%20interesa%20conocer%20más%20sobre%20Center%20Fitt" target="_blank" rel="noopener noreferrer" class="pulse-red bg-brand-red hover:bg-brand-redLight text-white font-bold px-8 py-4 rounded-full text-center transition-all duration-300 flex items-center justify-center gap-3 text-lg">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Escríbenos por WhatsApp
+            </a>
+            <a href="#nosotros" class="border border-gray-600 hover:border-brand-red text-white font-bold px-8 py-4 rounded-full text-center transition-all duration-300 text-lg hover:bg-brand-red/10">Conoce más</a>
+          </div>
+          
+          <div class="fade-up mt-16 grid grid-cols-3 gap-8 max-w-md" style="transition-delay: 0.4s">
+            <div>
+              <span class="block text-3xl font-black text-brand-red">3</span>
+              <span class="text-xs text-gray-500 uppercase tracking-wider">Máx. por turno</span>
+            </div>
+            <div>
+              <span class="block text-3xl font-black text-brand-red">100%</span>
+              <span class="text-xs text-gray-500 uppercase tracking-wider">Atención</span>
+            </div>
+            <div>
+              <span class="block text-3xl font-black text-brand-red">1:1</span>
+              <span class="text-xs text-gray-500 uppercase tracking-wider">Seguimiento</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotros" class="py-24 md:py-32 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div class="fade-up">
+            <span class="text-brand-red text-sm font-bold uppercase tracking-widest mb-4 block">Quiénes somos</span>
+            <h2 class="text-4xl md:text-5xl font-black mb-6 leading-tight">
+              No somos un gimnasio<br><span class="text-brand-red">tradicional</span>
+            </h2>
+            <div class="space-y-4 text-gray-400 leading-relaxed">
+              <p>En <strong class="text-white">Center Fitt</strong> creemos que cada persona merece un entrenamiento con atención real. Por eso, a diferencia de los gimnasios masivos donde te pierdes entre cientos de personas, nosotros trabajamos con <strong class="text-white">grupos reducidos de máximo 3 a 4 personas por turno</strong>.</p>
+              <p>Esto nos permite estar <strong class="text-white">pendiente de tu técnica</strong>, corregir a tiempo, motivarte de cerca y ajustar cada rutina según tus objetivos, tu nivel y tu cuerpo.</p>
+              <p>No es un espacio público donde entrenas solo. Es un lugar donde <strong class="text-white">tu coach está contigo</strong>, en cada repetición, en cada serie, en cada paso hacia tu mejor versión.</p>
+            </div>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <div class="flex items-center gap-3 bg-brand-gray rounded-lg px-4 py-3">
+                <div class="w-2 h-2 bg-brand-red rounded-full"></div>
+                <span class="text-sm font-semibold text-gray-300">Grupos reducidos</span>
+              </div>
+              <div class="flex items-center gap-3 bg-brand-gray rounded-lg px-4 py-3">
+                <div class="w-2 h-2 bg-brand-red rounded-full"></div>
+                <span class="text-sm font-semibold text-gray-300">Atención personalizada</span>
+              </div>
+              <div class="flex items-center gap-3 bg-brand-gray rounded-lg px-4 py-3">
+                <div class="w-2 h-2 bg-brand-red rounded-full"></div>
+                <span class="text-sm font-semibold text-gray-300">Seguimiento constante</span>
+              </div>
+              <div class="flex items-center gap-3 bg-brand-gray rounded-lg px-4 py-3">
+                <div class="w-2 h-2 bg-brand-red rounded-full"></div>
+                <span class="text-sm font-semibold text-gray-300">Ambiente exclusivo</span>
+              </div>
+            </div>
+          </div>
+          <div class="fade-up scene-3d relative" style="transition-delay: 0.2s">
+            <div class="frame-3d card-3d tilt-3d rounded-2xl overflow-hidden shadow-2xl shadow-brand-red/10" data-tilt-intensity="8">
+              <img src="IMAGENES/gym-01.jpeg" alt="Interior de Center Fitt con equipamiento profesional" class="w-full h-[500px] object-cover" loading="lazy">
+              <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-brand-black/90 to-transparent">
+                <span class="text-brand-red text-xs font-bold uppercase tracking-widest">Nuestro espacio</span>
+                <p class="text-white font-bold text-lg mt-1">Entrena con equipamiento de primer nivel</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios" class="py-24 md:py-32 bg-brand-dark relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+          <span class="text-brand-red text-sm font-bold uppercase tracking-widest mb-4 block">Nuestros servicios</span>
+          <h2 class="text-4xl md:text-5xl font-black">
+            Todo lo que necesitas<br><span class="text-brand-red">en un solo lugar</span>
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <article class="service-card card-3d tilt-3d fade-up bg-brand-gray rounded-2xl overflow-hidden border border-brand-grayLight transition-all duration-500" style="transition-delay: 0.1s" data-tilt-intensity="6">
+            <div class="relative h-56 overflow-hidden">
+              <img src="IMAGENES/gym-02.jpeg" alt="Gimnasio personalizado Center Fitt" class="w-full h-full object-cover" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-gray via-transparent to-transparent"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3">Gimnasio Personalizado</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                Entrenamiento en grupos de máximo 3-4 personas. Tu coach estará pendiente de tu técnica, tu progreso y tus objetivos en cada sesión.
+              </p>
+              <a href="https://wa.me/51923849852?text=Hola!%20Quiero%20info%20sobre%20el%20gimnasio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-brand-red font-bold text-sm hover:text-brand-redLight transition">
+                Consultar disponibilidad
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card card-3d tilt-3d fade-up bg-brand-gray rounded-2xl overflow-hidden border border-brand-grayLight transition-all duration-500" style="transition-delay: 0.2s" data-tilt-intensity="6">
+            <div class="relative h-56 overflow-hidden">
+              <img src="IMAGENES/gym-10.jpeg" alt="Cross Training en Center Fitt" class="w-full h-full object-cover" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-gray via-transparent to-transparent"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3">Cross Training</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                Entrenamiento funcional en grupo reducido. Kettlebells, medicine balls, bodyweight y más. Intensidad con supervisión constante.
+              </p>
+              <a href="https://wa.me/51923849852?text=Hola!%20Quiero%20info%20sobre%20Cross%20Training" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-brand-red font-bold text-sm hover:text-brand-redLight transition">
+                Consultar horarios
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card card-3d tilt-3d fade-up bg-brand-gray rounded-2xl overflow-hidden border border-brand-grayLight transition-all duration-500" style="transition-delay: 0.3s" data-tilt-intensity="6">
+            <div class="relative h-56 overflow-hidden">
+              <img src="IMAGENES/gym-04.jpeg" alt="Equipamiento y acondicionamiento Center Fitt" class="w-full h-full object-cover" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-gray via-transparent to-transparent"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-3">Nutrición</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                Planes alimenticios personalizados según tus objetivos. Seguimiento nutricional constante para potenciar tus resultados.
+              </p>
+              <a href="https://wa.me/51923849852?text=Hola!%20Quiero%20info%20sobre%20el%20servicio%20de%20nutrición" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-brand-red font-bold text-sm hover:text-brand-redLight transition">
+                Consultar plan nutricional
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="clientes" class="py-24 md:py-32 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+          <span class="text-brand-red text-sm font-bold uppercase tracking-widest mb-4 block">Testimonios</span>
+          <h2 class="text-4xl md:text-5xl font-black">
+            Clientes <span class="text-brand-red">felices</span>
+          </h2>
+          <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Resultados reales de personas que entrenan con nosotros cada día.</p>
+        </div>
+        <div class="video-carousel fade-up" id="videoCarousel">
+          <button class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Video anterior">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carouselTrack">
+              <article class="carousel-slide">
+                <video controls playsinline preload="metadata" poster="IMAGENES/gym-01.jpeg" class="client-video">
+                  <source src="VIDEOS/video-02.mp4" type="video/mp4">
+                </video>
+                <div class="p-5 md:p-6 border-t border-brand-grayLight">
+                  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 bg-brand-red/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-brand-red" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                      </div>
+                      <div>
+                        <p class="font-bold text-white">Entrenamiento personalizado</p>
+                        <p class="text-gray-500 text-sm">Atención 1:1 en cada sesión</p>
+                      </div>
+                    </div>
+                    <a href="https://wa.me/51923849852?text=Hola!%20Vi%20los%20testimonios%20y%20quiero%20empezar%20en%20Center%20Fitt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-redLight text-white font-bold text-sm px-5 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap">
+                      Quiero empezar
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel-slide">
+                <video controls playsinline preload="metadata" poster="IMAGENES/gym-02.jpeg" class="client-video">
+                  <source src="VIDEOS/video-03.mp4" type="video/mp4">
+                </video>
+                <div class="p-5 md:p-6 border-t border-brand-grayLight">
+                  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 bg-brand-red/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-brand-red" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                      </div>
+                      <div>
+                        <p class="font-bold text-white">Resultados reales</p>
+                        <p class="text-gray-500 text-sm">Seguimiento constante de tu progreso</p>
+                      </div>
+                    </div>
+                    <a href="https://wa.me/51923849852?text=Hola!%20Quiero%20reservar%20mi%20cupo%20en%20Center%20Fitt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-redLight text-white font-bold text-sm px-5 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap">
+                      Reservar mi cupo
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel-slide">
+                <video controls playsinline preload="metadata" poster="IMAGENES/gym-10.jpeg" class="client-video">
+                  <source src="VIDEOS/video-04.mp4" type="video/mp4">
+                </video>
+                <div class="p-5 md:p-6 border-t border-brand-grayLight">
+                  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 bg-brand-red/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-brand-red" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                      </div>
+                      <div>
+                        <p class="font-bold text-white">Experiencia Center Fitt</p>
+                        <p class="text-gray-500 text-sm">Grupos reducidos, máximo 3-4 personas</p>
+                      </div>
+                    </div>
+                    <a href="https://wa.me/51923849852?text=Hola!%20Quiero%20conocer%20los%20planes%20de%20Center%20Fitt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-redLight text-white font-bold text-sm px-5 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap">
+                      Ver planes
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <button class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Siguiente video">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Testimonios en video"></div>
+        </div>
+
+        <div class="cta-banner fade-up mt-12 md:mt-16 rounded-2xl p-8 md:p-12 text-center max-w-3xl mx-auto" style="transition-delay: 0.2s">
+          <h3 class="text-2xl md:text-3xl font-black mb-3">
+            ¿Listo para ser el <span class="text-brand-red">próximo?</span>
+          </h3>
+          <p class="text-gray-400 mb-8 leading-relaxed max-w-xl mx-auto">
+            Cupos limitados. Solo 3-4 personas por turno. Agenda hoy tu primera visita sin compromiso.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://wa.me/51923849852?text=Hola!%20Quiero%20agendar%20mi%20primera%20visita%20gratis%20en%20Center%20Fitt" target="_blank" rel="noopener noreferrer" class="pulse-red inline-flex items-center justify-center gap-3 bg-brand-red hover:bg-brand-redLight text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Agenda tu visita gratis
+            </a>
+            <a href="#servicios" class="inline-flex items-center justify-center border border-gray-600 hover:border-brand-red text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg hover:bg-brand-red/10">
+              Ver servicios
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeria" class="py-24 md:py-32 bg-brand-dark relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+          <span class="text-brand-red text-sm font-bold uppercase tracking-widest mb-4 block">Galería</span>
+          <h2 class="text-4xl md:text-5xl font-black">
+            Así es <span class="text-brand-red">Center Fitt</span>
+          </h2>
+        </div>
+        <div class="gallery-3d grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="galleryGrid">
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.05s" data-tilt-intensity="10" data-src="IMAGENES/gym-01.jpeg">
+            <img src="IMAGENES/gym-01.jpeg" alt="Sala principal Center Fitt" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64 md:row-span-2 md:h-auto" style="transition-delay: 0.1s" data-tilt-intensity="10" data-src="IMAGENES/gym-09.jpeg">
+            <img src="IMAGENES/gym-09.jpeg" alt="Vista aérea del gimnasio" loading="lazy" class="md:min-h-[520px]">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.15s" data-tilt-intensity="10" data-src="IMAGENES/gym-02.jpeg">
+            <img src="IMAGENES/gym-02.jpeg" alt="Zona Cross Training" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.2s" data-tilt-intensity="10" data-src="IMAGENES/gym-03.jpeg">
+            <img src="IMAGENES/gym-03.jpeg" alt="Zona cardio" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.25s" data-tilt-intensity="10" data-src="IMAGENES/gym-04.jpeg">
+            <img src="IMAGENES/gym-04.jpeg" alt="Equipamiento funcional" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.3s" data-tilt-intensity="10" data-src="IMAGENES/gym-10.jpeg">
+            <img src="IMAGENES/gym-10.jpeg" alt="Entrenamiento personalizado" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.35s" data-tilt-intensity="10" data-src="IMAGENES/gym-12.jpeg">
+            <img src="IMAGENES/gym-12.jpeg" alt="Espacio completo Center Fitt" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.4s" data-tilt-intensity="10" data-src="IMAGENES/gym-05.jpeg">
+            <img src="IMAGENES/gym-05.jpeg" alt="Área de entrenamiento" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.45s" data-tilt-intensity="10" data-src="IMAGENES/gym-06.jpeg">
+            <img src="IMAGENES/gym-06.jpeg" alt="Máquinas y accesorios" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.5s" data-tilt-intensity="10" data-src="IMAGENES/gym-07.jpeg">
+            <img src="IMAGENES/gym-07.jpeg" alt="Detalle del equipamiento" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.55s" data-tilt-intensity="10" data-src="IMAGENES/gym-08.jpeg">
+            <img src="IMAGENES/gym-08.jpeg" alt="Instalaciones Center Fitt" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.6s" data-tilt-intensity="10" data-src="IMAGENES/gym-11.jpeg">
+            <img src="IMAGENES/gym-11.jpeg" alt="Ambiente de entrenamiento" loading="lazy">
+          </div>
+          <div class="gallery-item fade-up scale-in tilt-3d rounded-xl h-56 md:h-64" style="transition-delay: 0.65s" data-tilt-intensity="10" data-src="IMAGENES/gym-13.jpeg">
+            <img src="IMAGENES/gym-13.jpeg" alt="Center Fitt por dentro" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="py-24 md:py-32 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+          <span class="text-brand-red text-sm font-bold uppercase tracking-widest mb-4 block">Contacto</span>
+          <h2 class="text-4xl md:text-5xl font-black">
+            ¿Listo para<br><span class="text-brand-red">empezar?</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12">
+          <div class="fade-up space-y-8">
+            <a href="https://wa.me/51923849852" target="_blank" rel="noopener noreferrer" class="flex items-center gap-5 bg-brand-gray rounded-xl p-6 border border-brand-grayLight hover:border-green-500/50 transition-all duration-300 group">
+              <div class="w-14 h-14 bg-green-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-7 h-7 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg">WhatsApp</h3>
+                <p class="text-gray-400 text-sm">+51 923 849 852</p>
+              </div>
+            </a>
+
+            <a href="https://instagram.com/centerfitt" target="_blank" rel="noopener noreferrer" class="flex items-center gap-5 bg-brand-gray rounded-xl p-6 border border-brand-grayLight hover:border-pink-500/50 transition-all duration-300 group">
+              <div class="w-14 h-14 bg-pink-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-7 h-7 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg">Instagram</h3>
+                <p class="text-gray-400 text-sm">@centerfitt</p>
+              </div>
+            </a>
+
+            <a href="mailto:centerfitt14@gmail.com" class="flex items-center gap-5 bg-brand-gray rounded-xl p-6 border border-brand-grayLight hover:border-blue-500/50 transition-all duration-300 group">
+              <div class="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg">Email</h3>
+                <p class="text-gray-400 text-sm">centerfitt14@gmail.com</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="fade-up flex flex-col justify-center" style="transition-delay: 0.2s">
+            <div class="bg-gradient-to-br from-brand-gray to-brand-dark rounded-2xl p-8 md:p-10 border border-brand-grayLight text-center">
+              <h3 class="text-2xl md:text-3xl font-black mb-4">
+                Agenda tu<br><span class="text-brand-red">primera visita</span>
+              </h3>
+              <p class="text-gray-400 mb-8 leading-relaxed">
+                Ven a conocer nuestro espacio. Sin compromisos, sin presión.
+              </p>
+              <a href="https://wa.me/51923849852?text=Hola!%20Quiero%20agendar%20una%20primera%20visita%20a%20Center%20Fitt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-brand-red hover:bg-brand-redLight text-white font-bold px-10 py-4 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-brand-red/30 text-lg w-full">
+                Escribir por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brand-dark border-t border-brand-grayLight py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-brand-red rounded flex items-center justify-center font-black text-sm text-white">CF</div>
+          <span class="font-bold text-lg tracking-tight">CENTER <span class="text-brand-red">FITT</span></span>
+        </div>
+        <p class="text-gray-600 text-sm">© 2026 Center Fitt. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-label="Vista ampliada de imagen">
+    <button id="lightboxClose" class="lightbox-close" aria-label="Cerrar">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <a href="https://wa.me/51923849852" target="_blank" rel="noopener noreferrer" class="whatsapp-float w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30" aria-label="WhatsApp">
+    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 80) {
+        navbar.classList.add('bg-brand-black/95', 'backdrop-blur-lg', 'shadow-lg');
+      } else {
+        navbar.classList.remove('bg-brand-black/95', 'backdrop-blur-lg', 'shadow-lg');
+      }
+    });
+
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuLine1 = document.getElementById('menuLine1');
+    const menuLine2 = document.getElementById('menuLine2');
+    const menuLine3 = document.getElementById('menuLine3');
+    let menuOpen = false;
+
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open');
+      if (menuOpen) {
+        menuLine1.style.transform = 'rotate(45deg) translate(4px, 4px)';
+        menuLine2.style.opacity = '0';
+        menuLine3.style.transform = 'rotate(-45deg) translate(4px, -4px)';
+        menuLine3.style.width = '24px';
+        document.body.style.overflow = 'hidden';
+      } else {
+        menuLine1.style.transform = '';
+        menuLine2.style.opacity = '1';
+        menuLine3.style.transform = '';
+        menuLine3.style.width = '16px';
+        document.body.style.overflow = '';
+      }
+    });
+
+    function closeMobileMenu() {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      menuLine1.style.transform = '';
+      menuLine2.style.opacity = '1';
+      menuLine3.style.transform = '';
+      menuLine3.style.width = '16px';
+      document.body.style.overflow = '';
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up, .fade-in, .scale-in').forEach(el => observer.observe(el));
+
+    const heroVideo = document.getElementById('heroVideo');
+    const HERO_LOOP_MINUTES = 2;
+
+    if (heroVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const setupHeroLoop = () => {
+        const loopEnd = Math.min(HERO_LOOP_MINUTES * 60, heroVideo.duration || HERO_LOOP_MINUTES * 60);
+        heroVideo.loop = false;
+        heroVideo.addEventListener('timeupdate', () => {
+          if (heroVideo.currentTime >= loopEnd) heroVideo.currentTime = 0;
+        });
+      };
+
+      heroVideo.addEventListener('loadedmetadata', setupHeroLoop);
+      heroVideo.play().catch(() => {});
+    }
+
+    document.querySelectorAll('.client-video').forEach(video => {
+      video.addEventListener('play', () => {
+        document.querySelectorAll('.client-video').forEach(v => {
+          if (v !== video) v.pause();
+        });
+        if (heroVideo && !heroVideo.paused) heroVideo.pause();
+      });
+    });
+
+    const carousel = document.getElementById('videoCarousel');
+    const carouselTrack = document.getElementById('carouselTrack');
+    const carouselPrev = document.getElementById('carouselPrev');
+    const carouselNext = document.getElementById('carouselNext');
+    const carouselDots = document.getElementById('carouselDots');
+    const slides = carouselTrack ? [...carouselTrack.children] : [];
+    let currentSlide = 0;
+    let touchStartX = 0;
+
+    function pauseAllCarouselVideos() {
+      slides.forEach(slide => slide.querySelector('video')?.pause());
+    }
+
+    function goToSlide(index) {
+      if (!carouselTrack || !slides.length) return;
+      currentSlide = Math.max(0, Math.min(index, slides.length - 1));
+      carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+      pauseAllCarouselVideos();
+      carouselPrev.disabled = currentSlide === 0;
+      carouselNext.disabled = currentSlide === slides.length - 1;
+      carouselDots.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+        dot.setAttribute('aria-selected', i === currentSlide);
+      });
+    }
+
+    if (carousel && slides.length) {
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', `Testimonio ${i + 1}`);
+        dot.setAttribute('aria-selected', i === 0);
+        dot.addEventListener('click', () => goToSlide(i));
+        carouselDots.appendChild(dot);
+      });
+
+      carouselPrev.addEventListener('click', () => goToSlide(currentSlide - 1));
+      carouselNext.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+      carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      carousel.addEventListener('touchend', (e) => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) goToSlide(currentSlide + (diff > 0 ? 1 : -1));
+      }, { passive: true });
+
+      goToSlide(0);
+    }
+
+    document.querySelectorAll('.tilt-3d').forEach(card => {
+      const intensity = parseFloat(card.dataset.tiltIntensity) || 8;
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) translateZ(10px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const src = item.dataset.src || item.querySelector('img')?.src;
+        if (!src) return;
+        lightboxImg.src = src;
+        lightboxImg.alt = item.querySelector('img')?.alt || 'Center Fitt';
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+</body>
+</html>
+
